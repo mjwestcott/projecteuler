@@ -28,10 +28,18 @@ def digitlen(num):
     # digitlen(9999) --> 4
     return len(str(abs(num)))
 
-def binary_nums(n):
-    """Return iterator over all n-digit binary numbers as tuples."""
-    # binary_nums(3) --> (0, 0, 0), (0, 0, 1), (0, 1, 0), ...
-    return product([0, 1], repeat=n)
+# We will use tuples of 1s and 0s to represent all the ways
+# to replace digits in a number. For example, (0, 1, 0) means
+# replace the second digit of a three digit number. For this
+# problem, we do not want masks ending in a set bit because
+# the final digit of a prime over 5 must end in 1, 3, 7, or 9.
+# Thus it would be impossible to make an eight prime value family
+# which replaces the final digit.
+def binary_masks(n):
+    """Return iterator over all n-digit binary masks except those ending
+    in a set bit."""
+    # binary_masks(3) --> (0, 0, 0), (0, 1, 0), (1, 0, 0), (1, 1, 0)
+    return filter(lambda x: x[-1] == 0, product([0, 1], repeat=n))
 
 def replace_digits(num, mask, val):
     """Replace digits in num with val at indicies specified by the mask.
@@ -47,7 +55,7 @@ def problem51():
     # the corresponding family of ten digits
     families = ([replace_digits(n, mask, val) for val in range(10)]
                 for n in get_primes(start=56995)
-                for mask in binary_nums(digitlen(n)))
+                for mask in binary_masks(digitlen(n)))
     # Find the next solution, where solution is the first prime
     # member of the family for which eight members are prime.
     return next(first_true(family, pred=is_prime)
