@@ -37,8 +37,8 @@ def replace_digits(num, mask, val):
     """Replace digits in num with val at indicies specified by the mask.
     If result leads with a zero, return a sentinel value (-1)."""
     # replace_digits(3537, [1, 1, 0, 0], 9) --> 9937
-    apply_mask = lambda original, masked: original if not masked else val
-    digits = list(map(apply_mask, to_digits(num), mask))
+    replace_if_set = lambda bit, x: val if bit else x
+    digits = list(map(replace_if_set, mask, to_digits(num)))
     return to_num(digits) if digits[0] != 0 else -1
 
 def problem51():
