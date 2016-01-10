@@ -23,23 +23,23 @@ import (
 // toDigits converts an int to a []int representing its digits.
 // e.g. 1234 -> [1 2 3 4]
 func toDigits(n int) []int {
-	var res []int
+	var ds []int
 	for n != 0 {
-		res = append(res, n%10)
+		ds = append(ds, n%10)
 		n = int(n / 10)
 	}
-	tools.ReverseInts(res)
-	return res
+	tools.ReverseInts(ds)
+	return ds
 }
 
 // toNum converts a []int representing digits to an int
 // e.g. [1 2 3 4] -> 1234
 func toNum(digits []int) int {
-	var res int
+	var n int
 	for i, x := range tools.ReversedInts(digits) {
-		res += x * int(math.Pow(10, float64(i)))
+		n += x * int(math.Pow(10, float64(i)))
 	}
-	return res
+	return n
 }
 
 // Our strategy is as follows. Since we are seeking an eight prime family, it
@@ -75,7 +75,7 @@ func findIndices(n int) [][]int {
 // digits at the specific indices with the digits 0 to 9.
 // e.g. 56003, [2 3] -> [56003, 56113, 56223, 56333, 56443, ...]
 func family(n int, indices []int) []int {
-	var res []int
+	var fam []int
 	digits := toDigits(n)
 	for i := 0; i < 10; i++ {
 		for _, idx := range indices {
@@ -83,12 +83,12 @@ func family(n int, indices []int) []int {
 		}
 		// return sentinel value (-1) in case of leading zero
 		if digits[0] == 0 {
-			res = append(res, -1)
+			fam = append(fam, -1)
 		} else {
-			res = append(res, toNum(digits))
+			fam = append(fam, toNum(digits))
 		}
 	}
-	return res
+	return fam
 }
 
 // isSmallestMember checks whether the given number satisfies
