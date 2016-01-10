@@ -109,7 +109,7 @@ func isSmallestMember(n int) bool {
 }
 
 func problem51() int {
-	for p := range tools.GetPrimesFrom(56995) {
+	for p := range tools.GetPrimesFrom(56995) { // infinite stream
 		if isSmallestMember(p) {
 			return p
 		}
