@@ -14,7 +14,7 @@ Find the smallest prime which, by replacing part of the number (not necessarily
 adjacent digits) with the same digit, is part of an eight prime value family.
 """
 from itertools import count, product
-from toolset import quantify, first_true, is_prime, get_primes
+from toolset import quantify, is_prime, get_primes
 
 def to_digits(num):
     # to_digits(1234) --> [1, 2, 3, 4]
@@ -60,4 +60,4 @@ def is_smallest_member(num):
                for indices in find_indices(num))
 
 def problem51():
-    return first_true(get_primes(start=56995), pred=is_smallest_member)
+    return next(filter(is_smallest_member, get_primes(start=56995)))
