@@ -15,9 +15,7 @@
 ;; prime value family.
 
 (ns euler.problem51
-  (:require [euler.toolset :refer [prime? get-primes]]
-            [clojure.math.combinatorics :as comb]
-            [clojure.math.numeric-tower :as math]))
+  (:require [euler.toolset :refer [prime? get-primes]]))
 
 (defn to-digits [n]
   ;; 1234 => (1 2 3 4)
@@ -67,7 +65,7 @@
       (to-num (replace-digits digits indices x)))))
 
 (defn smallest-member?
-  "Does the number statisfy the problem specification?"
+  "Does the number satisfy the problem specification?"
   [num]
   (some true? (for [indices (find-indices num)]
                 (= 8 (count (filter prime? (family num indices)))))))
