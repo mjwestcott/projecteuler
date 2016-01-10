@@ -18,46 +18,46 @@ from toolset import quantify, first_true, is_prime, get_primes
 
 def to_digits(num):
     # to_digits(1234) --> [1, 2, 3, 4]
-    return map(int, str(num))
+    return list(map(int, str(num)))
 
 def to_num(digits):
     # to_num([1, 2, 3, 4]) --> 1234
     return int(''.join(map(str, digits)))
 
-def digitlen(num):
-    # digitlen(9999) --> 4
-    return len(str(abs(num)))
+# Our strategy is as follows. Since we are seeking an eight prime family, it
+# must be the case that the pattern of digits which are replaced contains
+# either 0, 1, or 2 in the smallest family member. Therefore, we can search
+# through primes and replace digits in patterns specified by the locations 0,
+# 1, and 2. If the family of numbers that results contains eight primes, we
+# have found the solution.
+#
+# In the example given, 56003 is the smallest member of an eight prime family.
+# We would find the pattern of 0s at indices (2, 3) to produce the
+# corresponding family from 56**3.
+def find_indices(num):
+    """Yield three tuples, where each tuple contains the indices
+    in the num of the digits 0, 1, and 2 repspectively."""
+    # find_indices(18209912) --> (3), (0, 6), (2, 7)
+    # find_indices(56003) --> (2, 3), (), ()
+    digits = to_digits(num)
+    for dgt in [0, 1, 2]:
+        yield tuple(i for i, x in enumerate(digits) if x == dgt)
 
-# We will use tuples of 1s and 0s to represent all the ways
-# to replace digits in a number. For example, (0, 1, 0) means
-# replace the second digit of a three digit number. For this
-# problem, we do not want masks ending in a set bit because
-# the final digit of a prime over 5 must end in 1, 3, 7, or 9.
-# Thus it would be impossible to make an eight prime value family
-# which replaces the final digit.
-def binary_masks(n):
-    """Return iterator over all n-digit binary masks except those ending
-    in a set bit."""
-    # binary_masks(3) --> (0, 0, 0), (0, 1, 0), (1, 0, 0), (1, 1, 0)
-    return filter(lambda x: x[-1] == 0, product([0, 1], repeat=n))
+def family(num, indices):
+    """Yield the family of numbers resulting from replacing
+    digits at the specific indices with the digits 0 to 9."""
+    # family(56003, (2, 3)) --> 56003, 56113, 56223, 56333, 56443, ...
+    digits = to_digits(num)
+    for i in range(10):
+        for idx in indices:
+            digits[idx] = i
+        # yield sentinel value (-1) in case of leading zero
+        yield to_num(digits) if digits[0] != 0 else -1
 
-def replace_digits(num, mask, val):
-    """Replace digits in num with val at indicies specified by the mask.
-    If result leads with a zero, return a sentinel value (-1)."""
-    # replace_digits(3537, [1, 1, 0, 0], 9) --> 9937
-    replace_if_set = lambda bit, x: val if bit else x
-    digits = list(map(replace_if_set, mask, to_digits(num)))
-    return to_num(digits) if digits[0] != 0 else -1
+def is_smallest_member(num):
+    """Does the number satisfy the problem specification?"""
+    return any(quantify(family(num, indices), pred=is_prime) == 8
+               for indices in find_indices(num))
 
 def problem51():
-    # For each prime above 56993, for all possible binary masks
-    # representing ways to replace digits in that number, yield
-    # the corresponding family of ten digits
-    families = ([replace_digits(n, mask, val) for val in range(10)]
-                for n in get_primes(start=56995)
-                for mask in binary_masks(digitlen(n)))
-    # Find the next solution, where solution is the first prime
-    # member of the family for which eight members are prime.
-    return next(first_true(family, pred=is_prime)
-                for family in families
-                if quantify(family, pred=is_prime) == 8)
+    return first_true(get_primes(start=56995), pred=is_smallest_member)
