@@ -36,7 +36,7 @@ def to_num(digits):
 # corresponding family from 56**3.
 def find_indices(num):
     """Yield three tuples, where each tuple contains the indices
-    in the num of the digits 0, 1, and 2 repspectively."""
+    in the num of the digits 0, 1, and 2 respectively."""
     # find_indices(18209912) --> (3), (0, 6), (2, 7)
     # find_indices(56003) --> (2, 3), (), ()
     digits = to_digits(num)
