@@ -22,7 +22,7 @@
   [hand]
   (let [rs (for [h hand] (get h 0))
         trans {\A 14, \K 13, \Q 12, \J 11, \T 10}
-        convert #(for [x %] (if (contains? trans x) (trans x) (Character/digit x 10)))
+        convert #(for [x %] (get trans x (Character/digit x 10)))
         reverse-sort #(reverse (sort %))
         modify-ace #(if (= % [14 5 4 3 2]) [5 4 3 2 1] %)
         sort-by-freq #(sort-by (frequencies %) > %)]
