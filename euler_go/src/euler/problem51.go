@@ -111,7 +111,7 @@ func isSmallestMember(n int) bool {
 // problem51 loops over ints from 56995 to inf, returning the smallest member
 // of an 8-prime family.
 func problem51() int {
-	n := 56995 // given in the description as a member 7-prime family
+	n := 56995 // given in the description as a member of a 7-prime family
 	for {
 		if tools.IsPrime(n) && isSmallestMember(n) {
 			return n
