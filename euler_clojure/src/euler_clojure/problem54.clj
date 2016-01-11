@@ -7,7 +7,7 @@
 
 (defn suits
   "Return the suits of a given poker hand"
-  ;; hands are given as strings of rank, suit e.g. 'AC' or '8D'
+  ;; hands are given as vectors of strings of rank, suit
   ;; e.g. ["AC" "8D" "8H" "3C" "2S"] => [\C \D \H \C \S]
   [hand]
   (for [h hand] (get h 1)))
