@@ -32,7 +32,7 @@ func toDigits(n int) []int {
 	return ds
 }
 
-// toNum converts a []int representing digits to an int
+// toNum converts a []int representing digits to an int.
 // e.g. [1 2 3 4] -> 1234
 func toNum(digits []int) int {
 	var n int
@@ -91,8 +91,8 @@ func family(n int, indices []int) []int {
 	return fam
 }
 
-// isSmallestMember checks whether the given number satisfies
-// the problem description.
+// isSmallestMember checks whether the given number satisfies the problem
+// description: is it the smallest member of an 8-prime family?
 func isSmallestMember(n int) bool {
 	for _, indices := range findIndices(n) {
 		var primes []int
@@ -108,13 +108,16 @@ func isSmallestMember(n int) bool {
 	return false
 }
 
+// problem51 loops over ints from 56995 to inf, returning the smallest member
+// of an 8-prime family.
 func problem51() int {
-	for p := range tools.GetPrimesFrom(56995) { // infinite stream
-		if isSmallestMember(p) {
-			return p
+	n := 56995 // given in the description as a member 7-prime family
+	for {
+		if tools.IsPrime(n) && isSmallestMember(n) {
+			return n
 		}
+		n++
 	}
-	return -1
 }
 
 func main() {
