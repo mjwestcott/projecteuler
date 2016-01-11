@@ -26,15 +26,15 @@ func numCombinations(n, r int) *big.Int {
 }
 
 func problem53() int {
-	// Initialize limit as one-million.
-	var limit big.Int
-	limit.Exp(big.NewInt(10), big.NewInt(6), nil)
+	// Initialize target as one-million.
+	var target big.Int
+	target.Exp(big.NewInt(10), big.NewInt(6), nil)
 
 	sum := 0
 	for n := 1; n <= 100; n++ {
 		for r := 1; r <= n; r++ {
 			nCr := numCombinations(n, r)
-			if nCr.Cmp(&limit) == 1 { // nCr > limit
+			if nCr.Cmp(&target) == 1 { // nCr > target
 				sum++
 			}
 		}
