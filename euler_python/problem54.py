@@ -40,7 +40,7 @@ def fullhouse(hand): return group(ranks(hand)) == [3, 2]
 def straightflush(hand): return (flush(hand) and straight(hand))
 def flush(hand): return len(set(suits(hand))) == 1
 def straight(hand): return ((max(ranks(hand)) - min(ranks(hand)) == 4)
-                            and len(set(group(ranks(hand))))) == 1
+                            and len(set(ranks(hand))) == 5)
 
 def value(hand):
     """Return a tuple of (numerical value, ranks) for the given hand. The ranks
