@@ -20,7 +20,7 @@ def is_palindromic(num):
     return to_digits(num) == list(reversed(to_digits(num)))
 
 def is_lychrel(num):
-    rev = lambda x: to_num(to_digits(x)[::-1])
+    rev = lambda x: to_num(reversed(to_digits(x)))
     start = num + rev(num)
     iterations = iterate(lambda x: x + rev(x), start)
     return not any(is_palindromic(n) for n in take(50, iterations))
