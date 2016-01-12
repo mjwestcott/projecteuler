@@ -7,7 +7,6 @@ package main
 
 import (
 	"bufio"
-	"euler/tools"
 	"fmt"
 	"log"
 	"os"
@@ -146,18 +145,15 @@ func (h Hand) evaluate() int {
 // Did Player 1 win this round?
 func player1wins(h1, h2 Hand) bool {
 	// First check whether hands have different value on eight-point scale.
-	v1, v2 := h1.evaluate(), h2.evaluate()
-	if v1 != v2 {
+	if v1, v2 := h1.evaluate(), h2.evaluate(); v1 != v2 {
 		return v1 > v2
 	}
-	// If those are equal, perform lexicographic
-	// comparison based on the groups field.
-	x, y := len(h1.groups), len(h2.groups)
-	for i := 0; i < tools.Min(x, y); i++ {
-		// Recall that the groups field is a slice of [count rank]
-		// pairs. We are iterating over each pair, and returning as
-		// soon as we find a difference in rank between the players.
-		// (The counts must be identical since v1==v2.)
+	// If those values are equal, perform lexicographic comparison based on
+	// the groups field, a slice of [count rank] pairs ordered by highest
+	// count first, then highest rank first.
+	for i := range h1.groups {
+		// Since v1 == v2, the groups are the same length and the
+		// counts are identical. Therefore, compare ranks.
 		g1, g2 := h1.groups[i], h2.groups[i]
 		rank1, rank2 := g1[1], g2[1]
 		switch {
