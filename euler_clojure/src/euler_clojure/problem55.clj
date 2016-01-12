@@ -8,23 +8,17 @@
 
 (ns euler.problem55)
 
-(defn to-digits [n]
-  ;; 1234 => (1 2 3 4)
-  (map #(Character/getNumericValue %) (str n)))
+(defn reverse-num [n]
+  ;; 123456 => 654321N
+  (bigint (clojure.string/join (reverse (str n)))))
 
-(defn to-num [digits]
-  ;; [1 2 3 4] => 1234N
-  (bigint (clojure.string/join digits)))
-
-(def palindromic?
-  (memoize (fn [n] (= (to-digits n)
-                      (reverse (to-digits n))))))
+(def palindrome?
+  (memoize (fn [n] (= n (reverse-num n)))))
 
 (defn lychrel? [n]
-  (let [reverse-num #(to-num (reverse (to-digits %)))
-        start (+ n (reverse-num n))
+  (let [start (+ n (reverse-num n))
         iterations (iterate #(+' % (reverse-num %)) start)]
-    (not-any? palindromic? (take 50 iterations))))
+    (not-any? palindrome? (take 50 iterations))))
 
 (defn problem55 []
   (count (filter lychrel? (range 1 10000))))
