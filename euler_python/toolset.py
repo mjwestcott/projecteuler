@@ -1,4 +1,4 @@
-from itertools import count
+from itertools import count, islice
 from functools import lru_cache
 from math import sqrt, floor
 
@@ -40,9 +40,19 @@ def eratosthenes():
                 x += p
             D[x] = p
 
+def iterate(func, arg):
+    """Based on Clojure's function of the same name"""
+    while True:
+        yield arg
+        arg = func(arg)
+
 #------------------------------------------------------------------------------
-# From the Python itertools docs
+# Adapted from the Python itertools docs
+
+def take(n, iterable):
+    """Return first n items of the iterable as a list"""
+    return islice(iterable, n)
 
 def quantify(iterable, pred=bool):
-    "Count how many times the predicate is true"
+    """Count how many times the predicate is true"""
     return sum(map(pred, iterable))
