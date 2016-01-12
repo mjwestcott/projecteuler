@@ -6,7 +6,7 @@ that never forms a palindrome through the reverse and add process is called a
 Lychrel number. How many Lychrel numbers are there below ten-thousand? (Only
 consider fifty iterations)
 """
-from toolset import iterate, quantify, take
+from toolset import iterate, quantify, take, memoize
 
 def to_digits(num):
     # to_digits(1234) --> [1, 2, 3, 4]
@@ -16,6 +16,7 @@ def to_num(digits):
     # to_num([1, 2, 3, 4]) --> 1234
     return int(''.join(map(str, digits)))
 
+@memoize
 def is_palindromic(num):
     return to_digits(num) == list(reversed(to_digits(num)))
 
