@@ -10,6 +10,14 @@ import (
 	"sort"
 )
 
+// Min returns the minimum of two int values.
+func Min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
 // IsPrime checks whether n is prime
 func IsPrime(n int) bool {
 	if n < 3 {
@@ -26,14 +34,26 @@ func IsPrime(n int) bool {
 	return true
 }
 
+// Filter returns a new slice holding only
+// the elements of s that satisfy f()
+func Filter(s []int, fn func(int) bool) []int {
+	var p []int // == nil
+	for _, v := range s {
+		if fn(v) {
+			p = append(p, v)
+		}
+	}
+	return p
+}
+
 //-----------------------------------------------------------------------------
 // Sorting
 
 type sortRunes []rune
 
-func (s sortRunes) Less(i, j int) bool { return s[i] < s[j] }
-func (s sortRunes) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s sortRunes) Len() int           { return len(s) }
+func (s sortRunes) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+func (s sortRunes) Less(i, j int) bool { return s[i] < s[j] }
 
 // SortedString returns a new sorted string
 func SortedString(s string) string {
