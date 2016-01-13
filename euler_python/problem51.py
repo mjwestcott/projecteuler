@@ -16,14 +16,6 @@ adjacent digits) with the same digit, is part of an eight prime value family.
 from itertools import count, product
 from toolset import quantify, is_prime, get_primes
 
-def to_digits(num):
-    # to_digits(1234) --> [1, 2, 3, 4]
-    return list(map(int, str(num)))
-
-def to_num(digits):
-    # to_num([1, 2, 3, 4]) --> 1234
-    return int(''.join(map(str, digits)))
-
 # Our strategy is as follows. Since we are seeking an eight prime family, it
 # must be the case that the pattern of digits which are replaced contains
 # either 0, 1, or 2 in the smallest family member. Therefore, we can search
@@ -39,20 +31,21 @@ def find_indices(num):
     in the num of the digits 0, 1, and 2 respectively."""
     # find_indices(18209912) --> (3), (0, 6), (2, 7)
     # find_indices(56003) --> (2, 3), (), ()
-    digits = to_digits(num)
-    for dgt in [0, 1, 2]:
-        yield tuple(i for i, x in enumerate(digits) if x == dgt)
+    digits = str(num)
+    for target in "012":
+        yield tuple(i for i, x in enumerate(digits) if x == target)
 
 def family(num, indices):
     """Yield the family of numbers resulting from replacing
     digits at the specific indices with the digits 0 to 9."""
     # family(56003, (2, 3)) --> 56003, 56113, 56223, 56333, 56443, ...
-    digits = to_digits(num)
-    for i in range(10):
+    template = str(num)
+    for i in "0123456789":
+        member = list(template)
         for idx in indices:
-            digits[idx] = i
+            member[idx] = i
         # yield sentinel value (-1) in case of leading zero
-        yield to_num(digits) if digits[0] != 0 else -1
+        yield int(''.join(member)) if member[0] != "0" else -1
 
 def is_smallest_member(num):
     """Does the number satisfy the problem specification?"""
