@@ -57,7 +57,6 @@ func problem57() int {
 			sum++
 		}
 	}
-
 	return sum
 }
 
