@@ -5,8 +5,6 @@
   Lychrel numbers are there below ten-thousand? (Only consider fifty
   iterations)")
 
-(ns euler.problem55)
-
 (defn reverse-num [n]
   ;; 123456 => 654321N
   (bigint (clojure.string/join (reverse (str n)))))
