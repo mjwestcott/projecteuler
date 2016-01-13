@@ -1,9 +1,6 @@
-;; problem53.clj
-;;
-;; How many, not necessarily distinct, values of nCr, for 1 ≤ n ≤ 100, are greater
-;; than one-million?
-
-(ns euler.problem53)
+(ns euler.problem53
+  "How many, not necessarily distinct, values of nCr, for 1 ≤ n ≤ 100, are greater
+  than one-million?")
 
 (defn factorial [n]
   (reduce *' (range 1 (inc n))))

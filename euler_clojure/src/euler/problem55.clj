@@ -1,10 +1,9 @@
-;; problem55.clj
-;;
-;; If we take 47, reverse and add, 47 + 74 = 121, which is
-;; palindromic. A number that never forms a palindrome through the
-;; reverse and add process is called a Lychrel number. How many
-;; Lychrel numbers are there below ten-thousand? (Only consider fifty
-;; iterations)
+(ns euler.problem55
+  "If we take 47, reverse and add, 47 + 74 = 121, which is
+  palindromic. A number that never forms a palindrome through the
+  reverse and add process is called a Lychrel number. How many
+  Lychrel numbers are there below ten-thousand? (Only consider fifty
+  iterations)")
 
 (ns euler.problem55)
 
