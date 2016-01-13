@@ -24,8 +24,8 @@ func problem56() int64 {
 	var max, i, j int64
 	for i = 0; i < 100; i++ {
 		for j = 0; j < 100; j++ {
-			a, b := big.NewInt(i), big.NewInt(j)
-			c := a.Exp(a, b, nil) // c = a**b
+			a, b, c := big.NewInt(i), big.NewInt(j), new(big.Int)
+			c.Exp(a, b, nil) // c = a**b
 			sum := digitSum(c)
 			if sum > max {
 				max = sum
