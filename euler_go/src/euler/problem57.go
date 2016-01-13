@@ -50,7 +50,7 @@ func problem57() int {
 	tail := big.NewRat(2, 1)
 
 	for i := 0; i < limit; i++ {
-		temp := new(big.Rat).Set(tail)
+		temp := new(big.Rat)
 		tail.Add(two, temp.Inv(tail))   // tail = (2 + 1/tail)
 		result.Add(one, temp.Inv(tail)) // result = (1 + 1/tail)
 		if checkNumerator(result) {
