@@ -17,12 +17,11 @@ func factorial(n int) *big.Int {
 }
 
 func numCombinations(n, r int) *big.Int {
-	a := factorial(n)
-	b := factorial(r)
-	c := factorial(n - r)
-	denominator := b.Mul(b, c)
-	result := a.Div(a, denominator)
-	return result
+	x := factorial(n)
+	y := factorial(r)
+	z := factorial(n - r)
+	denom := new(big.Int).Mul(y, z)
+	return new(big.Int).Div(x, denom)
 }
 
 func problem53() int {
