@@ -34,8 +34,9 @@ func checkNumerator(x *big.Rat) bool {
 	return numDigits(num) > numDigits(denom)
 }
 
+// How many fractions contain a numerator with more digits than the denomintor?
 func problem57() int {
-	sum := 0           // How many numerators > denominators?
+	sum := 0           // Number of fractions meeting the description.
 	const limit = 1000 // Given in problem description.
 	one := big.NewRat(1, 1)
 	two := big.NewRat(2, 1)
