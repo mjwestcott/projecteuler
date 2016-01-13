@@ -6,7 +6,7 @@
 ;; Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
 ;; contain the same digits.
 
-(ns euler.problem51)
+(ns euler.problem52)
 
 (defn multiples [x]
   (for [i (range 2 7)] (* i x)))
