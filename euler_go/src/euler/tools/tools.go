@@ -46,6 +46,21 @@ func Filter(s []int, fn func(int) bool) []int {
 	return p
 }
 
+// Pow returns the integer power a**b.
+func Pow(a, b int) int {
+	// https://groups.google.com/d/msg/golang-nuts/PnLnr4bc9Wo/z9ZGv2DYxXoJ
+	// Donald Knuth, The Art of Computer Programming, Volume 2, Section 4.6.3
+	p := 1
+	for b > 0 {
+		if b&1 != 0 {
+			p *= a
+		}
+		b >>= 1
+		a *= a
+	}
+	return p
+}
+
 //-----------------------------------------------------------------------------
 // Sorting
 
