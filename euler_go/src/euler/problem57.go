@@ -38,8 +38,8 @@ func checkNumerator(x *big.Rat) bool {
 func problem57() int {
 	sum := 0           // Number of fractions meeting the description.
 	const limit = 1000 // Given in problem description.
-	one := big.NewRat(1, 1)
-	two := big.NewRat(2, 1)
+	one := new(big.Rat).SetInt64(1)
+	two := new(big.Rat).SetInt64(2)
 
 	// result will be re-used each iteration to store the
 	// current value of the fractional expansion.
@@ -47,7 +47,7 @@ func problem57() int {
 	// tail will be re-used each iteration to store the
 	// current value of the repeating component of the expansion.
 	// That component is 2, (2 + 1/2), (2 + 1/(2 + 1/2)), ...
-	tail := big.NewRat(2, 1)
+	tail := new(big.Rat).SetInt64(2)
 
 	for i := 0; i < limit; i++ {
 		temp := new(big.Rat)
