@@ -62,5 +62,3 @@
 
 (defn problem51 []
   (first (filter smallest-member? (get-primes 56995))))
-
-(problem51)
