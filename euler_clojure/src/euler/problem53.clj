@@ -9,7 +9,6 @@
   (/ (factorial n) (*' (factorial r) (factorial (- n r)))))
 
 (defn problem53 []
-  (reduce + (for [n (range 1 (inc 100))
-                  r (range 1 (inc n))
-                  :when (> (num-combinations n r) 1e6)]
-              1)))
+  (count (filter true? (for [n (range 1 (inc 100))
+                             r (range 1 (inc n))]
+                         (> (num-combinations n r) 1e6)))))
