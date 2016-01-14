@@ -2,8 +2,6 @@
   "The file, poker.txt, contains one-thousand random hands dealt to two players.
   How many hands does Player 1 win?")
 
-(ns euler.problem54)
-
 (defn suits
   "Return the suits of a given poker hand"
   ;; hands are given as vectors of strings of rank, suit
