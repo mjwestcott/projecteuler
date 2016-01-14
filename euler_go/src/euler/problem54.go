@@ -96,22 +96,22 @@ func newHand(cards []string) Hand {
 }
 
 // Hand type predicates.
-func (h Hand) onepair() bool       { return h.samePatternAs([]int{2, 1, 1, 1}) }
-func (h Hand) twopair() bool       { return h.samePatternAs([]int{2, 2, 1}) }
-func (h Hand) threeofakind() bool  { return h.samePatternAs([]int{3, 1, 1}) }
-func (h Hand) fourofakind() bool   { return h.samePatternAs([]int{4, 1}) }
-func (h Hand) fullhouse() bool     { return h.samePatternAs([]int{3, 2}) }
+func (h Hand) onepair() bool       { return isEqual(h.pattern, []int{2, 1, 1, 1}) }
+func (h Hand) twopair() bool       { return isEqual(h.pattern, []int{2, 2, 1}) }
+func (h Hand) threeofakind() bool  { return isEqual(h.pattern, []int{3, 1, 1}) }
+func (h Hand) fourofakind() bool   { return isEqual(h.pattern, []int{4, 1}) }
+func (h Hand) fullhouse() bool     { return isEqual(h.pattern, []int{3, 2}) }
 func (h Hand) flush() bool         { return len(h.suits) == 1 }
 func (h Hand) straight() bool      { return (len(h.pattern) == 5) && (h.ranks[0]-h.ranks[4] == 4) }
 func (h Hand) straightflush() bool { return h.flush() && h.straight() }
 
-// Check whether Hand h has the same pattern as the given pat.
-func (h Hand) samePatternAs(pat []int) bool {
-	if len(h.pattern) != len(pat) {
+// Check whether two []int are identical.
+func isEqual(x, y []int) bool {
+	if len(x) != len(y) {
 		return false
 	}
-	for i := 0; i < len(pat); i++ {
-		if h.pattern[i] != pat[i] {
+	for i := 0; i < len(x); i++ {
+		if x[i] != y[i] {
 			return false
 		}
 	}
