@@ -36,14 +36,11 @@ def corners(n):
     return [n, n-x, n-(2*x), n-(3*x)]
 
 def problem58():
-    # Yields all four corners from each new layer, starting at fifth layer.
-    # next(all_corners) --> [81, 73, 65, 57], [121, 111, 101, 91], ...
-    all_corners = (corners(x**2) for x in count(start=9, step=2))
-    primes, total = 8, 13
-    while True:
-        cs = next(all_corners)
-        primes += quantify(cs, pred=is_prime)
+    length = 7
+    primes = 8
+    total = 13
+    while primes/total > 0.1:
+        length += 2
+        primes += quantify(corners(length**2), pred=is_prime)
         total += 4
-        if primes / total < 0.10:
-            # cs[0] is the bottom right corner number
-            return square_length(cs[0])
+    return length
