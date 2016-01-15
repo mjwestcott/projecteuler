@@ -11,7 +11,7 @@ Find the lowest sum for a set of five primes for which any two primes
 concatenate to produce another prime.
 """
 from collections import deque
-from itertools import takewhile, dropwhile
+from itertools import takewhile
 from toolset import memoize, is_prime, get_primes
 
 @memoize
