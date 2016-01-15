@@ -1,4 +1,4 @@
-// problem58.go
+// problem59.go
 //
 // Each character on a computer is assigned a unique code and the preferred
 // standard is ASCII (American Standard Code for Information Interchange). For
