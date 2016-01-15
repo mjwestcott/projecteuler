@@ -30,7 +30,7 @@ from collections import Counter
 from itertools import cycle
 
 def decrypt(cipher, start=0, n=3):
-    """Given a list of ints (cipher), finds the most common item of the
+    """Given a list of ints (cipher), find the most common item of the
     sublist starting at given index (start), and taking every nth element.
     We assume this item is an int representing the ordinal value of the
     space character, so return item XOR ord(' ')"""
