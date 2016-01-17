@@ -31,7 +31,7 @@ def problem60(limit=9000):
     primes = list(takewhile(lambda x: x < limit, get_primes()))
     primes.reverse() # we want to search smaller primes first from pop()
 
-    # Use depth-first tree search.
+    # Use depth-first search.
     frontier = [[p] for p in primes]
     while frontier:
         node = frontier.pop()
