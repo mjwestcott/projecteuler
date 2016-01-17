@@ -25,14 +25,14 @@ def all_concat_to_prime(candidates):
                for y in candidates
                if x != y)
 
-# It's not clear how many prime numbers to search through.
-# Running next(n for n in count(start=0, step=1000) if problem60(n))
-# suggests 9000.
+# It's not clear how many prime numbers to search through. Running
+# next(n for n in count(start=0, step=1000) if problem60(n)) suggests 9000.
 def problem60(limit=9000):
     primes = list(takewhile(lambda x: x < limit, get_primes()))
+    primes.reverse() # we want to search smaller primes first from pop()
 
     # Use depth-first tree search.
-    frontier = [[p] for p in reversed(primes)] # check smaller primes first
+    frontier = [[p] for p in primes]
     while frontier:
         node = frontier.pop()
         if len(node) == 5:
