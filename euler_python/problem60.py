@@ -41,3 +41,8 @@ def problem60(limit=9000):
             child = node + [x]
             if x > max(node) and all_concat_to_prime(child):
                 frontier.append(child)
+
+# Note: our algorithm does not guarantee that the solution found, 26033, is the
+# smallest. We could verify our solution by raising the limit on primes to
+# 26033, searching exhaustively, and observing that no smaller solutions are
+# found.
