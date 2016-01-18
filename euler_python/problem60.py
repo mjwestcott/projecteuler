@@ -23,7 +23,7 @@ def all_concat_to_prime(candidates):
     return all(concats_to_prime(x, y)
                for x in candidates
                for y in candidates
-               if x != y)
+               if x != y and x < y)
 
 # It's not clear how many prime numbers to search through. Running
 # next(n for n in count(start=0, step=1000) if problem60(n)) suggests 9000.
