@@ -46,3 +46,8 @@
 ;; It's not clear how many primes to search through.
 ;; Experimentation suggests around 9000.
 (defn problem60 [] (depth-first-search (get-primes 1 9000)))
+
+;; But note that this does not guarantee that the solution found, 26033, is the
+;; smallest possible. We could verify that this is the case by raising the
+;; limit on primes to 26033, searching exhaustively, and observing that no
+;; smaller solutions are found.
