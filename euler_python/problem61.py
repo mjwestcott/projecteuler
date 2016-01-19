@@ -46,7 +46,7 @@ def is_all_cyclic(node):
     return all(is_cyclic(node[i], node[(i+1)%x]) for i in range(x))
 
 def is_fourdigit(n):
-    # We can safely truncate to int as x and y come from the polygonal funcs.
+    # We can safely truncate to int as n comes from the polygonal funcs.
     return len(str(int(n))) == 4
 
 def fourdigit_polys(func):
