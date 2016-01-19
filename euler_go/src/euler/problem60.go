@@ -44,9 +44,9 @@ func (c *cache) concatsToPrime(x, y int) bool {
 	return val
 }
 
-func (c *cache) allConcatToPrime(candidates []int) bool {
-	for _, x := range candidates {
-		for _, y := range candidates {
+func (c *cache) allConcatToPrime(n node) bool {
+	for _, x := range n {
+		for _, y := range n {
 			if x != y && x < y {
 				if c.concatsToPrime(x, y) == false {
 					return false
