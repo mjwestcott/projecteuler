@@ -173,7 +173,7 @@ func problem60() (int, error) {
 		case x := <-ans:
 			return x, nil
 		case <-done:
-			return -1, fmt.Errorf("No solution found, limit: %v", limit)
+			return -1, fmt.Errorf("problem60: no solution found with limit %v", limit)
 		}
 	}
 }
