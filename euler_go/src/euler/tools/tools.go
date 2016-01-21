@@ -61,8 +61,62 @@ func Pow(a, b int) int {
 	return p
 }
 
-//-----------------------------------------------------------------------------
-// Sorting
+// Permutations returns all r-length permutations in lexicographic sort order.
+// So, if the input iterable is sorted, the permutation tuples will be produced
+// in sorted order.
+func Permutations(xs []int, r int) [][]int {
+	// Translated from the Python itertools module, see C source below for comments.
+	// https://github.com/python/cpython/blob/master/Modules/itertoolsmodule.c#L3127
+	pool := append([]int{}, xs...)
+	n := len(pool)
+
+	switch {
+	case n == 0:
+		panic("Permutations: passed zero-length slice")
+	case r < 1 || r > n:
+		panic("Permutations: passed bad r value")
+	}
+
+	indices := make([]int, n)
+	cycles := make([]int, r)
+
+	for i := 0; i < n; i++ {
+		indices[i] = i
+	}
+	for i := 0; i < r; i++ {
+		cycles[i] = n - i
+	}
+
+	var res [][]int
+	res = append(res, pool[:r])
+
+	for {
+		var i int // Represents the leftmost element to change per iteration.
+		for i = r - 1; i >= 0; i-- {
+			cycles[i]--
+			if cycles[i] == 0 {
+				index := indices[i]
+				for j := i; j < n-1; j++ {
+					indices[j] = indices[j+1]
+				}
+				indices[n-1] = index
+				cycles[i] = n - i
+			} else {
+				j := cycles[i]
+				indices[i], indices[n-j] = indices[n-j], indices[i]
+				perm := make([]int, r)
+				for i, index := range indices[:r] {
+					perm[i] = pool[index]
+				}
+				res = append(res, perm)
+				break
+			}
+		}
+		if i < 0 {
+			return res
+		}
+	}
+}
 
 type sortRunes []rune
 
@@ -76,9 +130,6 @@ func SortedString(s string) string {
 	sort.Sort(sortRunes(r))
 	return string(r)
 }
-
-//-----------------------------------------------------------------------------
-// Reversing
 
 // ReverseInts reverses a []int in place
 func ReverseInts(xs []int) {
