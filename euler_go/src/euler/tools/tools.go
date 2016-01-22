@@ -10,12 +10,15 @@ import (
 	"sort"
 )
 
-// Min returns the minimum of two int values.
-func Min(x, y int) int {
-	if x < y {
-		return x
+// Min returns the minimum of any number of int values.
+func Min(xs ...int) int {
+	min := xs[0]
+	for _, x := range xs {
+		if x < min {
+			min = x
+		}
 	}
-	return y
+	return min
 }
 
 // IsPrime checks whether n is prime
