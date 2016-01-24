@@ -163,7 +163,6 @@ func problem60() (int, error) {
 						}
 					}
 				}
-
 			}
 		}()
 	}
