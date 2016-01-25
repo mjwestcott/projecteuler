@@ -1,6 +1,8 @@
 from itertools import count, islice
-from functools import lru_cache
+from fractions import Fraction
+from functools import lru_cache, reduce
 from math import sqrt, floor
+import operator
 
 memoize = lru_cache(maxsize=None)
 
@@ -40,8 +42,19 @@ def eratosthenes():
                 x += p
             D[x] = p
 
+def prime_factors(num, start=2):
+    """Return all prime factors (ordered) of num in a list"""
+    # From https://github.com/tokland/pyeuler
+    candidates = range(start, int(sqrt(num)) + 1)
+    factor = next((x for x in candidates if (num % x == 0)), None)
+    return ([factor] + prime_factors(num // factor, factor) if factor else [num])
+
+def phi(n):
+    ps = list(unique(prime_factors(n)))
+    return int(n * reduce(operator.mul, (1 - Fraction(1, p) for p in ps)))
+
 def iterate(func, arg):
-    """Based on Clojure's function of the same name"""
+    # Based on Clojure's function of the same name.
     while True:
         yield arg
         arg = func(arg)
@@ -66,9 +79,26 @@ class memoize_mutable:
 # Adapted from the Python itertools docs
 
 def take(n, iterable):
-    """Return first n items of the iterable as a list"""
+    """Return first n items of the iterable as a list."""
     return islice(iterable, n)
 
 def quantify(iterable, pred=bool):
-    """Count how many times the predicate is true"""
+    """Count how many times the predicate is true."""
     return sum(map(pred, iterable))
+
+def unique(iterable, key=None):
+    "List unique elements, preserving order. Remember all elements ever seen."
+    # unique('AAAABBBCCDAABBB') --> A B C D
+    # unique('ABBCcAD', str.lower) --> A B C D
+    seen = set()
+    if key is None:
+        for element in iterable:
+            if element not in seen:
+                seen.add(element)
+                yield element
+    else:
+        for element in iterable:
+            k = key(element)
+            if k not in seen:
+                seen.add(k)
+                yield element
