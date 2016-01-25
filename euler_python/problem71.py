@@ -24,10 +24,13 @@ from fractions import Fraction
 
 def mediant(a, b):
     # mediant(Fraction(2, 5), Fraction(3, 7)) --> Fraction(5, 12)
-    return Fraction(a.numerator + b.numerator, a.denominator + b.denominator)
+    num = a.numerator + b.numerator
+    denom = a.denominator + b.denominator
+    return Fraction(num, denom)
 
 def problem71():
-    left, right = Fraction(2, 5), Fraction(3, 7)
+    left = Fraction(2, 5)
+    right = Fraction(3, 7)
     while True:
         med = mediant(left, right)
         if med.denominator > 1e6:
