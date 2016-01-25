@@ -17,7 +17,7 @@ order of size, find the numerator of the fraction immediately to the left of
 """
 from fractions import Fraction
 
-# https://en.wikipedia.org/wiki/Farey_sequence
+# See https://en.wikipedia.org/wiki/Farey_sequence
 # The value of the new term in between neighbours 2/5 and 3/7 is found by
 # computing the mediant of those neighbours. We can take result to be the next
 # left-hand neighbour of 3/7 iteratively until the denominator reaches 1e6.
