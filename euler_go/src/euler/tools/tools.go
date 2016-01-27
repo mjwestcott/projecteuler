@@ -21,6 +21,15 @@ func Min(xs ...int) int {
 	return min
 }
 
+// Sum returns the sum of any number of int values.
+func Sum(xs ...int) int {
+	sum := 0
+	for _, x := range xs {
+		sum += x
+	}
+	return sum
+}
+
 // IsPrime checks whether n is prime
 func IsPrime(n int) bool {
 	if n < 3 {
