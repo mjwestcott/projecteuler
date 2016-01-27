@@ -26,7 +26,7 @@ from toolset import get_primes
 # its unique prime factors. Therefore, phi(n) will diminish as n has a
 # greater number of small unique prime factors. Since we are seeking the
 # largest value for n/phi(n), we want to minimize phi(n). We are therefore
-# looking for the largest number < 1e6 which is the product of the smallest
+# looking for the largest number <= 1e6 which is the product of the smallest
 # unique prime factors, i.e successive prime numbers starting from 2.
 
 def candidates():
