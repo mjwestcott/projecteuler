@@ -58,6 +58,19 @@ func IsPrime(n int) bool {
 	return true
 }
 
+// Unique returns the unique ints from a slice in order of first seen.
+func Unique(xs []int) []int {
+	seen := make(map[int]bool)
+	result := []int{}
+	for _, x := range xs {
+		if !seen[x] {
+			seen[x] = true
+			result = append(result, x)
+		}
+	}
+	return result
+}
+
 // Filter returns a new slice holding only
 // the elements of s that satisfy f()
 func Filter(s []int, fn func(int) bool) []int {
@@ -190,4 +203,13 @@ func StringsToInts(ss []string) []int {
 		xs = append(xs, x)
 	}
 	return xs
+}
+
+// IntsToStrings converts a slice of ints to Itoa-converted strings.
+func IntsToStrings(xs []int) []string {
+	var ss []string
+	for _, x := range xs {
+		ss = append(ss, strconv.Itoa(x))
+	}
+	return ss
 }
