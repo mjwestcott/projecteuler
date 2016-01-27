@@ -8,6 +8,7 @@ package tools
 import (
 	"math"
 	"sort"
+	"strconv"
 )
 
 // Min returns the minimum of any number of int values.
@@ -178,4 +179,15 @@ func ReversedString(s string) string {
 		rs[i], rs[j] = rs[j], rs[i]
 	}
 	return string(rs)
+}
+
+// StringsToInts converts a slice of strings representing numbers
+// to a slice of ints.
+func StringsToInts(ss []string) []int {
+	var xs []int
+	for _, s := range ss {
+		x, _ := strconv.Atoi(string(s))
+		xs = append(xs, x)
+	}
+	return xs
 }
