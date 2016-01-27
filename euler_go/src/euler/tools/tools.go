@@ -21,6 +21,17 @@ func Min(xs ...int) int {
 	return min
 }
 
+// Max returns the maximum of any number of int values.
+func Max(xs ...int) int {
+	max := xs[0]
+	for _, x := range xs {
+		if x > max {
+			max = x
+		}
+	}
+	return max
+}
+
 // Sum returns the sum of any number of int values.
 func Sum(xs ...int) int {
 	sum := 0
