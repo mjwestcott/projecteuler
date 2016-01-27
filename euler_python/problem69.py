@@ -12,6 +12,8 @@ n ≤ 1,000,000 for which n/φ(n) is a maximum.
 from itertools import takewhile
 from toolset import get_primes
 
+# from fractions import Fraction
+# from toolset import prime_factors
 # def phi(n):
 #     ps = list(unique(prime_factors(n)))
 #     return n * reduce(operator.mul, (1 - Fraction(1, p) for p in ps))
