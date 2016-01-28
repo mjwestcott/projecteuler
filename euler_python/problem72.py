@@ -29,6 +29,6 @@ def phi_sieve(limit):
 
 def problem72():
     # See https://en.wikipedia.org/wiki/Farey_sequence
-    # for the connection the Euler's phi function.
+    # for the connection to Euler's phi function.
     # In particular, note that |F n| = |F n-1| + phi(n).
     return sum(phi_sieve(1000000))
