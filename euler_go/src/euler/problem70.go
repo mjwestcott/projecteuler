@@ -44,7 +44,7 @@ func problem70() int {
 	}
 
 	// Keep track of the minimal n/phi(n) ratio found
-	// and the value of n that produced it
+	// and the value of n that produced it.
 	min := math.Inf(1)
 	res := 0
 
