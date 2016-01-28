@@ -71,6 +71,14 @@ func Unique(xs []int) []int {
 	return result
 }
 
+// GCD returns the greatest common divisor of two ints.
+func GCD(x, y int) int {
+	for y != 0 {
+		x, y = y, x%y
+	}
+	return x
+}
+
 // PrimeFactors returns all prime factors of n in ascending order.
 func PrimeFactors(n int) []int {
 	return pfactors(n, 2)
