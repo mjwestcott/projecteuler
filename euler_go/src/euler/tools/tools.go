@@ -71,6 +71,30 @@ func Unique(xs []int) []int {
 	return result
 }
 
+// PrimeFactors returns all prime factors of n in ascending order.
+func PrimeFactors(n int) []int {
+	return pfactors(n, 2)
+}
+
+func pfactors(n, start int) []int {
+	for i := start; i <= int(math.Sqrt(float64(n))); i++ {
+		if n%i == 0 {
+			return append([]int{i}, pfactors(n/i, i)...)
+		}
+	}
+	return []int{n}
+}
+
+// Phi is Euler's phi function (also known as Euler's totient function).
+func Phi(n int) int {
+	ps := Unique(PrimeFactors(n))
+	x := float64(n)
+	for _, p := range ps {
+		x *= (1.0 - (1.0 / float64(p)))
+	}
+	return int(x)
+}
+
 // Filter returns a new slice holding only
 // the elements of s that satisfy f()
 func Filter(s []int, fn func(int) bool) []int {
