@@ -38,13 +38,13 @@ func problem68() string {
 			// with the numerically lowest external node and working clockwise.
 			// So we specify that a < min(d, f, h, j)
 			if a < tools.Min(d, f, h, j) {
-				solution := (Ring{
+				solution := Ring{
 					// As shown in the summation test above, the
 					// 5-gon ring is represented as this pattern:
 					// {a b c} {d c e} {f e g} {h g i} {j i b}
 					// The problem asks for it flattened into one string.
 					a, b, c, d, c, e, f, e, g, h, g, i, j, i, b,
-				})
+				}
 				s := strings.Join(tools.IntsToStrings(solution), "")
 				if s > max && len(s) == strlen {
 					max = s
