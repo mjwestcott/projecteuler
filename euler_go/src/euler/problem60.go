@@ -44,7 +44,7 @@ func (c *cache) concatsToPrime(x, y int) bool {
 	return val
 }
 
-func (c *cache) allConcatToPrime(n node) bool {
+func (c *cache) allConcatToPrime(n Node) bool {
 	for _, x := range n {
 		for _, y := range n {
 			if x != y && x < y {
@@ -57,49 +57,8 @@ func (c *cache) allConcatToPrime(n node) bool {
 	return true
 }
 
-// A node is a candidate solution to the problem.
-type node []int
-
-func (n node) max() int {
-	if len(n) == 0 {
-		panic("max: node has 0 elements")
-	}
-	x := n[0]
-	for _, y := range n[1:] {
-		if y > x {
-			x = y
-		}
-	}
-	return x
-}
-
-func (n node) sum() int {
-	res := 0
-	for _, x := range n {
-		res += x
-	}
-	return res
-}
-
-// Stack is a simple stack implementation.
-type stack []node
-
-// Pop a node off the stack. Panics if s is empty.
-func (s *stack) pop() node {
-	x := (*s)[len(*s)-1]
-	*s = (*s)[:len(*s)-1]
-
-	// Shrink the underlying array if the slice length <= 1/4 its capacity.
-	if len(*s) <= cap(*s)/4 {
-		*s = append([]node{}, *s...)
-	}
-	return x
-}
-
-// Push a node onto the stack.
-func (s *stack) push(x node) {
-	*s = append(*s, x)
-}
+// A Node is a candidate solution to the problem.
+type Node []int
 
 // We are going to use a concurrent depth-first search with a worker goroutine
 // pool of 4. Each goroutine will search for a solution from a different
@@ -139,18 +98,18 @@ func problem60() (int, error) {
 				}
 
 				// Perform depth-first search starting at the given prime.
-				var frontier stack
-				frontier.push(node{p})
+				var frontier tools.Stack
+				frontier.Push(Node{p})
 
 				for len(frontier) != 0 {
-					n := frontier.pop()
+					n := frontier.Pop().(Node)
 					if len(n) == 5 {
-						ans <- n.sum()
+						ans <- tools.Sum(n...)
 					}
 					for _, prime := range primes {
-						child := append(append(*new(node), n...), prime)
-						if prime > n.max() && c.allConcatToPrime(child) {
-							frontier.push(child)
+						child := append(append(*new(Node), n...), prime)
+						if prime > tools.Max(n...) && c.allConcatToPrime(child) {
+							frontier.Push(child)
 						}
 					}
 				}
