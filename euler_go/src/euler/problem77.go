@@ -36,22 +36,6 @@ func numPartitions(n int, primes []int) int {
 	}
 }
 
-// Return a key sutiable for use in a map.
-func k(n int, primes []int) string {
-	return fmt.Sprintf("%d %v", n, primes)
-}
-
-var cache = make(map[string]int)
-
-// A memoized version of numPartitions.
-func memoNumPartitions(n int, primes []int) int {
-	key := k(n, primes)
-	if _, ok := cache[key]; !ok {
-		cache[key] = numPartitions(n, primes)
-	}
-	return cache[key]
-}
-
 func problem77() int {
 	var primes []int
 	for i := 2; i < 100; i++ {
@@ -63,7 +47,7 @@ func problem77() int {
 	// What is the first value which can be written as the sum of primes in
 	// over five thousand different ways?
 	for i := 2; ; i++ {
-		if x := memoNumPartitions(i, primes); x > 5000 {
+		if x := numPartitions(i, primes); x > 5000 {
 			return i
 		}
 	}
