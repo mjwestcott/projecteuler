@@ -256,3 +256,23 @@ func IntToDigits(n int) []int {
 	ReverseInts(xs)
 	return xs
 }
+
+// Stack is a simple generic stack implementation.
+type Stack []interface{}
+
+// Pop item off the stack. Panics if s is empty.
+func (s *Stack) Pop() interface{} {
+	x := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+
+	// Shrink the underlying array if the slice length <= 1/4 its capacity.
+	if len(*s) <= cap(*s)/4 {
+		*s = append([]interface{}{}, *s...)
+	}
+	return x
+}
+
+// Push item onto the stack.
+func (s *Stack) Push(x interface{}) {
+	*s = append(*s, x)
+}
