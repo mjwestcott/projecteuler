@@ -51,7 +51,9 @@ func problem75() int {
 
 	// Use a depth-first search to exhaust the search space, starting with
 	// the first Pythagorean triple.
-	frontier := tools.Stack{Triple{3, 4, 5}}
+	var frontier tools.Stack
+	frontier.Push(Triple{3, 4, 5})
+
 	for len(frontier) > 0 {
 		t := frontier.Pop().(Triple)
 		L := tools.Sum(t...)
@@ -59,6 +61,7 @@ func problem75() int {
 			continue
 		}
 		triangles[L]++
+
 		// We're not only interested in 'primitive triples', but
 		// multiples too
 		a, b, c := t[0], t[1], t[2]
@@ -69,6 +72,7 @@ func problem75() int {
 			}
 			triangles[tools.Sum(multiple...)]++
 		}
+
 		for _, child := range t.children() {
 			frontier.Push(child)
 		}
