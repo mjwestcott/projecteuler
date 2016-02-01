@@ -127,19 +127,10 @@ func problem60() (int, error) {
 	pchan := make(chan int) // Used to send worker goroutines a starting prime to search.
 	var wg sync.WaitGroup
 
-	go func() {
-		for _, p := range primes {
-			pchan <- p
-		}
-		close(pchan)
-		wg.Wait()    // Wait for all workers to complete their search
-		done <- true // before sending completion signal.
-	}()
-
 	// Woker goroutine pool of 4.
 	for i := 0; i < 4; i++ {
+		wg.Add(1)
 		go func() {
-			wg.Add(1)
 			for {
 				p, ok := <-pchan
 				if !ok {
@@ -166,6 +157,15 @@ func problem60() (int, error) {
 			}
 		}()
 	}
+
+	go func() {
+		for _, p := range primes {
+			pchan <- p
+		}
+		close(pchan)
+		wg.Wait()    // Wait for all workers to complete their search
+		done <- true // before sending completion signal.
+	}()
 
 	for {
 		select {
