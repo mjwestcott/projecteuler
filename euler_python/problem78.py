@@ -13,7 +13,8 @@ in exactly seven different ways, so p(5)=7.
      OO   O   O   O
     O   O   O   O   O
 
-Find the least value of n for which p(n) is divisible by one million."""
+Find the least value of n for which p(n) is divisible by one million.
+"""
 from itertools import count, cycle, takewhile
 from toolset import memoize, take
 
