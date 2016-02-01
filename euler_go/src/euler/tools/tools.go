@@ -245,3 +245,14 @@ func IntsToStrings(xs []int) []string {
 	}
 	return ss
 }
+
+// IntToDigits converts an int to a slice of ints representing its digits.
+func IntToDigits(n int) []int {
+	var xs []int
+	for n > 0 {
+		xs = append(xs, n%10)
+		n /= 10
+	}
+	ReverseInts(xs)
+	return xs
+}
