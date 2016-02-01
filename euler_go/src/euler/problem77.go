@@ -50,7 +50,6 @@ func memoNumPartitions(n int, primes []int) int {
 		cache[key] = numPartitions(n, primes)
 	}
 	return cache[key]
-
 }
 
 func problem77() int {
