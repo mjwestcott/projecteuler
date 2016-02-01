@@ -46,7 +46,7 @@ func isCyclic(x, y int) bool {
 }
 
 // Is the set of digits cyclic, including the last number with the first?
-func isAllCyclic(n node) bool {
+func isAllCyclic(n Node) bool {
 	z := len(n)
 	for i := range n {
 		if !isCyclic(n[i], n[(i+1)%z]) {
@@ -85,36 +85,8 @@ func allFourDigitPolygons() [][]int {
 	return res
 }
 
-// A candidate solution to the problem.
-type node []int
-
-func (n node) sum() int {
-	res := 0
-	for _, x := range n {
-		res += x
-	}
-	return res
-}
-
-// Stack is a simple stack implementation.
-type stack []node
-
-// Pop a node off the stack. Panics if s is empty.
-func (s *stack) pop() node {
-	x := (*s)[len(*s)-1]
-	*s = (*s)[:len(*s)-1]
-
-	// Shrink the underlying array if the slice length <= 1/4 its capacity.
-	if len(*s) <= cap(*s)/4 {
-		*s = append([]node{}, *s...)
-	}
-	return x
-}
-
-// Push a node onto the stack.
-func (s *stack) push(x node) {
-	*s = append(*s, x)
-}
+// A Node is a candidate solution to the problem.
+type Node []int
 
 // For every way to order the polygonal types, perform depth-first search,
 // returning as soon as a solution is found.
@@ -124,22 +96,22 @@ func problem61() int {
 	for _, perm := range perms {
 		// We will build up candidate solutions incrementally. The
 		// starting nodes are therefore the members of polys[perm[0]].
-		var frontier stack
+		var frontier tools.Stack
 		for _, p := range polys[perm[0]] {
-			frontier.push(node{p})
+			frontier.Push(Node{p})
 		}
 		for len(frontier) > 0 {
-			n := frontier.pop()
+			n := frontier.Pop().(Node)
 			z := len(n)
 			if z == 6 && isAllCyclic(n) {
-				return n.sum()
+				return tools.Sum(n...)
 			} else if z < 6 {
 				// Note that perm[z] contains the next
 				// polygonal type in this order.
 				for _, y := range polys[perm[z]] {
 					if isCyclic(n[z-1], y) {
-						child := append(append(node{}, n...), y)
-						frontier.push(child)
+						child := append(append(Node{}, n...), y)
+						frontier.Push(child)
 					}
 				}
 			}
