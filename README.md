@@ -13,4 +13,4 @@ research, you will find I often adopt the same strategy to solve them.
 
 I started working on these problems by forking the excellent
 [pyeuler](https://github.com/tokland/pyeuler) repository, which solved problems
-1-50 in a 'functional' style.
+1-50 in a 'functional' style using Python.
