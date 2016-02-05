@@ -11,6 +11,7 @@ research, you will find I often adopt the same strategy to solve them.
 
 ## History
 
-I started working on these problems by forking the excellent
+I started working on these problems by
+[forking](https://github.com/mjwestcott/pyeuler) the excellent
 [pyeuler](https://github.com/tokland/pyeuler) repository, which solved problems
 1-50 in a 'functional' style using Python.
