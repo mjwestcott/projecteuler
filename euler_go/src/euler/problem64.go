@@ -1,5 +1,7 @@
 // problem64.go
 //
+// https://projecteuler.net/problem=64
+//
 // The first ten continued fraction representations of (irrational) square roots are:
 //
 //     sqrt(2)=[1;(2)]          period=1

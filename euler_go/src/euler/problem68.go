@@ -1,5 +1,7 @@
 // problem68.go
 //
+// https://projecteuler.net/problem=68
+//
 // What is the maximum 16-digit string for a 'magic' 5-gon ring?
 
 package main

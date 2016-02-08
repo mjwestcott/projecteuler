@@ -1,5 +1,7 @@
 // problem65.go
 //
+// https://projecteuler.net/problem=65
+//
 // The infinite continued fraction can be written, √2 = [1;(2)], (2) indicates
 // that 2 repeats ad infinitum. In a similar way, √23 = [4;(1,3,1,8)].
 //

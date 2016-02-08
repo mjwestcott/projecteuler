@@ -1,5 +1,7 @@
 // problem77.go
 //
+// https://projecteuler.net/problem=77
+//
 // It is possible to write ten as the sum of primes in exactly five different
 // ways:
 //

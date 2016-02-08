@@ -1,5 +1,7 @@
 // problem66.go
 //
+// https://projecteuler.net/problem=66
+//
 // Consider quadratic Diophantine equations of the form: x**2 – Dy**2 = 1.
 // For example, when D=13, the minimal solution in x is 6492 – 13×1802 = 1.
 // It can be assumed that there are no solutions in positive integers when
