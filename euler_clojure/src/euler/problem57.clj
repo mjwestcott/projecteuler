@@ -1,5 +1,7 @@
 (ns euler.problem57
-  "It is possible to show that the square root of two can be expressed
+  "https://projecteuler.net/problem=57
+
+  It is possible to show that the square root of two can be expressed
   as an infinite continued fraction.
 
     √ 2 = 1 + 1/(2 + 1/(2 + 1/(2 + ... ))) = 1.414213...

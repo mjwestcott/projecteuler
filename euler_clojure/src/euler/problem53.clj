@@ -1,5 +1,7 @@
 (ns euler.problem53
-  "How many, not necessarily distinct, values of nCr, for 1 ≤ n ≤ 100, are greater
+  "https://projecteuler.net/problem=53
+
+  How many, not necessarily distinct, values of nCr, for 1 ≤ n ≤ 100, are greater
   than one-million?")
 
 (defn factorial [n]

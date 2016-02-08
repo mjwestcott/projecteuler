@@ -1,5 +1,7 @@
 (ns euler.problem56
-  "Considering natural numbers of the form, a**b, where a, b < 100,
+  "https://projecteuler.net/problem=56
+
+  Considering natural numbers of the form, a**b, where a, b < 100,
   what is the maximum digital sum?"
   (:require [clojure.math.numeric-tower :as math]))
 
