@@ -1,6 +1,8 @@
 """
 problem70.py
 
+https://projecteuler.net/problem=70
+
 Euler's Totient function, φ(n) [sometimes called the phi function], is used to
 determine the number of positive numbers less than or equal to n which are
 relatively prime to n. For example, as 1, 2, 4, 5, 7, and 8, are all less than

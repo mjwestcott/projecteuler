@@ -1,6 +1,8 @@
 """
 problem68.py
 
+https://projecteuler.net/problem=68
+
 What is the maximum 16-digit string for a 'magic' 5-gon ring?
 """
 from itertools import chain

@@ -1,6 +1,8 @@
 """
 problem60.py
 
+https://projecteuler.net/problem=60
+
 The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes
 and concatenating them in any order the result will always be prime. For
 example, taking 7 and 109, both 7109 and 1097 are prime. The sum of these four
