@@ -17,7 +17,7 @@
          cubes {}]
     (let [x (math/expt i 3)
           canonical (str/join (sort (str x)))
-          seen (get cubes canonical (vector))
+          seen (get cubes canonical [])
           next (conj seen x)]
       (if (= 5 (count next))
         (apply min next)
