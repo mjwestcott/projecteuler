@@ -40,4 +40,4 @@
     (+ (first xs) (tail (rest xs)))))
 
 (defn problem65 []
-  (apply + (digits (numerator (e 100)))))
+  (reduce + (digits (numerator (e 100)))))

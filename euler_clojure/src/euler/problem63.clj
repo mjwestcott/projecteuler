@@ -17,4 +17,4 @@
   ;; Retrieve results from find-powers until the empty list indicates no more
   ;; results. Find the length of all items of every resulting list.
   (let [results (take-while not-empty (map find-powers (iterate inc 1)))]
-    (apply + (map count results))))
+    (reduce + (map count results))))

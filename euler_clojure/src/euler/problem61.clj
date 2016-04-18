@@ -77,7 +77,7 @@
               nil
               ;; Success: evaluate to the sum of the values in this node.
               (and (= z 6) (all-cyclic? node))
-              (apply + node)
+              (reduce + node)
               ;; Append child nodes to the frontier and continue the search.
               (< z 6)
               (let [children (for [y (fourdigit-polys (nth perm z))
