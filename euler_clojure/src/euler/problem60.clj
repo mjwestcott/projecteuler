@@ -17,7 +17,8 @@
   (memoize
    (fn [x y]
      (let [join #(Integer/parseInt (str/join "" [(str %1) (str %2)]))]
-       (and (prime? (join x y)) (prime? (join y x)))))))
+       (and (prime? (join x y))
+            (prime? (join y x)))))))
 
 (defn all-concat-to-prime?
   [candidates]
