@@ -8,13 +8,14 @@
   contain the same digits.")
 
 (defn multiples [x]
-  (for [i (range 2 7)] (* i x)))
+  (map #(* % x) (range 2 7)))
 
 (defn same-digits? [x y]
-  (= (sort (str x)) (sort (str y))))
+  (= (sort (str x))
+     (sort (str y))))
 
 (defn all-same-digits? [x]
-  (every? true? (for [y (multiples x)] (same-digits? x y))))
+  (every? true? (map #(same-digits? % x) (multiples x))))
 
 (defn problem52 []
-  (first (for [x (iterate inc 1) :when (all-same-digits? x)] x)))
+  (first (filter all-same-digits? (iterate inc 1))))
