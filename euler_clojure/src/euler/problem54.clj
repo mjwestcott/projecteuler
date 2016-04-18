@@ -9,7 +9,7 @@
   ;; hands are given as vectors of strings of rank, suit
   ;; e.g. ["AC" "8D" "8H" "3C" "2S"] => [\C \D \H \C \S]
   [hand]
-  (for [h hand] (get h 1)))
+  (vec (map second hand)))
 
 (defn ranks
   "Return the ranks of a given poker hand."
@@ -19,10 +19,10 @@
   ;; This allows us to correctly judge that the second hand > the first.
   ;; Also, an ace is played 'low' i.e. with rank 1 if it makes a straight.
   [hand]
-  (let [rs (for [h hand] (get h 0))
+  (let [rs (map first hand)
         trans {\A 14, \K 13, \Q 12, \J 11, \T 10}
         convert #(for [x %] (get trans x (Character/digit x 10)))
-        reverse-sort #(reverse (sort %))
+        reverse-sort (comp reverse sort)
         modify-ace #(if (= % [14 5 4 3 2]) [5 4 3 2 1] %)
         sort-by-freq #(sort-by (frequencies %) > %)]
     (-> rs convert reverse-sort modify-ace sort-by-freq vec)))
@@ -79,7 +79,7 @@
 
 (defn problem54 []
   (with-open [rdr (clojure.java.io/reader "resources/poker.txt")]
-    ;; How many hands did Player 1 win?
-    (count (filter true? (for [row (line-seq rdr)]
-                           (let [cards (clojure.string/split row #" ")]
-                             (player1-wins? (deal-two-hands cards))))))))
+    (let [rows (line-seq rdr)
+          cards (map #(clojure.string/split % #" ") rows)]
+      ;; How many hands did Player 1 win?
+      (count (filter player1-wins? (map deal-two-hands cards))))))
