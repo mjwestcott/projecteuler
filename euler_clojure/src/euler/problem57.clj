@@ -23,7 +23,8 @@
   (count (str n)))
 
 (defn more-numerator-digits? [r]
-  (> (num-digits (numerator r)) (num-digits (denominator r))))
+  (> (num-digits (numerator r))
+     (num-digits (denominator r))))
 
 (defn tail
   "The repeating pattern at the end of the expansions"
