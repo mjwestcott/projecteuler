@@ -23,7 +23,10 @@
   (:require [euler.toolset :refer [digits]]))
 
 (defn partial-values [n]
-  (take n (cons 2 (flatten (for [i (iterate inc 1)] [1 (* 2 i) 1])))))
+  (take n
+   (cons 2
+    (flatten
+     (for [i (iterate inc 1)] [1 (* 2 i) 1])))))
 
 (defn tail [values]
   ;; The repeating pattern at the tail end of the equation.
