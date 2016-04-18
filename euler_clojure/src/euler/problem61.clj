@@ -48,7 +48,7 @@
   [node]
   (every? #(apply cyclic? %) (for [i (range (count node))]
                                [(nth node i)
-                                (nth node (mod (+ i 1) (count node)))])))
+                                (nth node (mod (inc i) (count node)))])))
 
 (defn fourdigit? [n] (= 4 (count (str (int n)))))
 
@@ -56,7 +56,8 @@
   "Given a function representing a polygonal type, return all four-digit
   members of that type."
   [func]
-  (let [dw (drop-while (complement fourdigit?) (for [i (iterate inc 0)] (func i)))]
+  (let [dw (drop-while (complement fourdigit?)
+                       (for [i (iterate inc 0)] (func i)))]
     (take-while fourdigit? dw)))
 
 (defn problem61 []
@@ -68,7 +69,7 @@
         ;; We will build up candidate solutions incrementally. The starting
         ;; frontier is therefore full of one-length vectors of all the four
         ;; digit numbers for the first polygonal type of this permutation.
-        (loop [frontier (vec (for [x (fourdigit-polys (nth perm 0))] (vector x)))]
+        (loop [frontier (vec (for [x (fourdigit-polys (nth perm 0))] [x]))]
           (let [node (peek frontier)
                 z (count node)]
             (cond
