@@ -35,13 +35,12 @@
 (defn heptagonal [n] (/ (* n (- (* 5 n) 3)) 2))
 (defn octagonal  [n] (* n (- (* 3 n) 2)))
 
-(defn- check-cyclic
+(def cyclic?
   "Are these four-digit numbers cyclic?"
-  [x y]
-  (= (subvec (vec (str (int x))) 2 4)
-     (subvec (vec (str (int y))) 0 2)))
-
-(def cyclic? (memoize check-cyclic))
+  (memoize
+   (fn [x y]
+     (= (subvec (vec (str (int x))) 2 4)
+        (subvec (vec (str (int y))) 0 2)))))
 
 (defn all-cyclic?
   "Is the set of digits cyclic, including the last number with the first?"
@@ -50,15 +49,17 @@
                                [(nth node i)
                                 (nth node (mod (inc i) (count node)))])))
 
-(defn fourdigit? [n] (= 4 (count (str (int n)))))
+(defn fourdigit? [n]
+  (= 4 (count (str (int n)))))
 
-(defn fourdigit-polys
+(def fourdigit-polys
   "Given a function representing a polygonal type, return all four-digit
   members of that type."
-  [func]
-  (let [dw (drop-while (complement fourdigit?)
-                       (map func (iterate inc 0)))]
-    (take-while fourdigit? dw)))
+  (memoize
+   (fn [func]
+     (let [dw (drop-while (complement fourdigit?)
+                          (map func (iterate inc 0)))]
+       (take-while fourdigit? dw)))))
 
 (defn problem61 []
   ;; For every way to order the polygonal types, perform depth-first search.
