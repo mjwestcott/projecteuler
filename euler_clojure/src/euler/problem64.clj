@@ -16,26 +16,26 @@
 
   Exactly four continued fractions, for N <= 13, have an odd period. How many
   continued fractions for N <= 10000 have an odd period?"
-  (:require [clojure.math.numeric-tower :as math]))
+  (:require [clojure.math.numeric-tower :refer [expt floor sqrt]]))
 
 (defn continued-fraction-sqrt [S]
   ;; https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
   ;; Using variables S, m, d, a as in the URL above.
-  (let [root (math/sqrt S)]
-    (if (= root (math/floor root))
+  (let [root (sqrt S)]
+    (if (= root (floor root))
       [root]
       (loop [seen []
              m 0
              d 1
-             a (math/floor (math/sqrt S))]
+             a (floor (sqrt S))]
         (let [next-seen (conj seen {:m m, :d d, :a a})
               next-m (- (* d a) m)
-              next-d (/ (- S (math/expt next-m 2)) d)
-              next-a (math/floor (/ (+ (math/floor (math/sqrt S)) next-m) next-d))]
+              next-d (/ (- S (expt next-m 2)) d)
+              next-a (floor (/ (+ (floor (sqrt S)) next-m) next-d))]
           ;; If the pattern repeats, return all the 'a' variables collected in order.
           ;; Otherwise, continue the recursion.
           (if (some #(= % {:m next-m, :d next-d, :a next-a}) next-seen)
-            (vec (for [x next-seen] (get x :a)))
+            (map :a next-seen)
             (recur next-seen
                    next-m
                    next-d
