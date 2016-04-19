@@ -57,7 +57,7 @@
   members of that type."
   [func]
   (let [dw (drop-while (complement fourdigit?)
-                       (for [i (iterate inc 0)] (func i)))]
+                       (map func (iterate inc 0)))]
     (take-while fourdigit? dw)))
 
 (defn problem61 []
