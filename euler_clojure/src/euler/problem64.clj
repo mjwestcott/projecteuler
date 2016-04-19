@@ -42,5 +42,5 @@
                    next-a)))))))
 
 (defn problem64 []
-  (let [cont-fracs (for [i (range 2 10001)] (continued-fraction-sqrt i))]
+  (let [cont-fracs (map continued-fraction-sqrt (range 2 10001))]
     (count (filter #(odd? (count (rest %))) cont-fracs))))
