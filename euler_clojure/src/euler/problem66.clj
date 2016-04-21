@@ -29,18 +29,19 @@
   ;; See problem64.clj for a link explaining this algorithm. Here we use 'D'
   ;; in place of 'S' to be consistent with the wording of the question.
   [D]
-  (map (comp int :a)
-       (iterate
-         (fn [{m :m d :d a :a}]
-           (let [next-m (- (* d a) m)
-                 next-d (/ (- D (expt next-m 2)) d)
-                 next-a (floor (/ (+ (floor (sqrt D)) next-m) next-d))]
-             {:m next-m
-              :d next-d
-              :a next-a}))
-         {:m 0
-          :d 1
-          :a (floor (sqrt D))})))
+  (let [floor-sqrt-D (floor (sqrt D))]
+    (map (comp int :a)
+         (iterate
+           (fn [{m :m d :d a :a}]
+             (let [next-m (- (* d a) m)
+                   next-d (/ (- D (expt next-m 2)) d)
+                   next-a (floor (/ (+ floor-sqrt-D next-m) next-d))]
+               {:m next-m
+                :d next-d
+                :a next-a}))
+           {:m 0
+            :d 1
+            :a floor-sqrt-D}))))
 
 (defn cont-frac
   "Return the continued fraction of the given values."
