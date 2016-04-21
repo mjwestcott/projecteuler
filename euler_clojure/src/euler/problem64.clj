@@ -21,17 +21,18 @@
 (defn continued-fraction-sqrt [S]
   ;; https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
   ;; Using variables S, m, d, a as in the URL above.
-  (let [root (sqrt S)]
-    (if (= root (floor root))
-      [root]
+  (let [root-S (sqrt S)
+        floor-root-S (floor root-S)]
+    (if (= root-S floor-root-S)
+      [root-S]
       (loop [seen []
              m 0
              d 1
-             a (floor (sqrt S))]
+             a floor-root-S]
         (let [next-seen (conj seen {:m m, :d d, :a a})
               next-m (- (* d a) m)
               next-d (/ (- S (expt next-m 2)) d)
-              next-a (floor (/ (+ (floor (sqrt S)) next-m) next-d))]
+              next-a (floor (/ (+ floor-root-S next-m) next-d))]
           ;; If the pattern repeats, return all the 'a' variables collected in order.
           ;; Otherwise, continue the recursion.
           (if (some #(= % {:m next-m, :d next-d, :a next-a}) next-seen)
