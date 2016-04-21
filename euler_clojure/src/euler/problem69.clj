@@ -8,7 +8,7 @@
 
   It can be seen that n=6 produces a maximum n/φ(n) for n ≤ 10. Find the value
   of n ≤ 1,000,000 for which n/φ(n) is a maximum."
-  (:require [euler.toolset :refer [prime? get-primes]]))
+  (:require [euler.toolset :refer [get-primes]]))
 
 ;; Note that the phi function multiplies n by (1 - (1/p)) for every p in its
 ;; unique prime factors. Therefore, phi(n) will diminish as n has a greater
