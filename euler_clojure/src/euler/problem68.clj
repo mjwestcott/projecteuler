@@ -33,10 +33,8 @@
 (defn problem68 []
   (let [start 6  ; Each line cannot sum to less than 6 (1+2+3)
         end 28]  ; Or greater than 27 (8+9+10)
-    (->> (map five-gon-rings (range start end))
-         (apply concat)
+    (->> (mapcat five-gon-rings (range start end))
          (filter (complement empty?))
          (map (comp str/join #(map str %) flatten))
          (filter #(= (count %) 16))
          ((comp bigint last sort)))))
-
