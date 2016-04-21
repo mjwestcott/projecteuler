@@ -50,6 +50,10 @@ def prime_factors(num, start=2):
     return ([factor] + prime_factors(num // factor, factor) if factor else [num])
 
 def phi(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
     ps = list(unique(prime_factors(n)))
     return int(n * reduce(operator.mul, (1 - Fraction(1, p) for p in ps)))
 

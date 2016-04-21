@@ -17,7 +17,7 @@ be contained in the set of reduced proper fractions for d ≤ 1,000,000?
 
 def phi_sieve(limit):
     """Yield all values of phi(i) for i in range(2, limit+1).
-    By convention phi(0)=1 and phi(1)=1, but Project Euler
+    By convention phi(0)=0 and phi(1)=1, but Project Euler
     appears to disagree, so those values are ignored."""
     # Solved in the style of the sieve of Eratosthenes.
     phi = list(range(limit+1))

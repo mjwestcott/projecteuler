@@ -23,7 +23,7 @@ import "fmt"
 func problem72() float64 {
 	const limit = 1000000
 
-	// By convention phi(0)=1 and phi(1)=1, but Project Euler
+	// By convention phi(0)=0 and phi(1)=1, but Project Euler
 	// appears to disagree, so those values are set to zero.
 	var phi [limit + 1]float64
 	for i := 2; i <= limit; i++ {

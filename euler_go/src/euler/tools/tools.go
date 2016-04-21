@@ -95,6 +95,12 @@ func pfactors(n, start int) []int {
 
 // Phi is Euler's phi function (also known as Euler's totient function).
 func Phi(n int) int {
+	switch n {
+	case 0:
+		return 0
+	case 1:
+		return 1
+	}
 	ps := Unique(PrimeFactors(n))
 	x := float64(n)
 	for _, p := range ps {
