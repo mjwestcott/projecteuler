@@ -13,7 +13,7 @@
 
 (defn get-primes
   ([]
-   (get-primes 3))
+   (get-primes 2))
   ([start]
    (filter prime? (iterate inc start)))
   ([start end]
