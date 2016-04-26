@@ -25,3 +25,20 @@
        (take-while pos?)      ; (1234, 123, 12, 1)
        (mapv #(mod % 10))     ; [4, 3, 2, 1]
        rseq))                 ; (1 2 3 4)
+
+(defn prime-factors
+  ([n]
+   (prime-factors n 2))
+  ([n start]
+   (let [candidates (range start (inc (int (math/sqrt n))))
+         factor (first (filter #(= 0 (mod n %)) candidates))]
+     (if (nil? factor)
+       (list n)
+       (cons factor (prime-factors (/ n factor) factor))))))
+
+(defn phi [n]
+  (cond
+    (= n 0) 0
+    (= n 1) 1
+    :else (let [ps (distinct (prime-factors n))]
+            (int (* n (reduce * (map #(- 1 (/ 1 %)) ps)))))))
