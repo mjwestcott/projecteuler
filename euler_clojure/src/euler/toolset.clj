@@ -42,3 +42,8 @@
     (= n 1) 1
     :else (let [ps (distinct (prime-factors n))]
             (int (* n (reduce * (map #(- 1 (/ 1 %)) ps)))))))
+
+(defn gcd [a b]
+  (if (zero? b)
+    a
+    (recur b (mod a b))))
