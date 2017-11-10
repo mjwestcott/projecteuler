@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  python:
+    build: ./python
+
+  go:
+    build: ./go
+
+  clojure:
+    build: ./clojure
