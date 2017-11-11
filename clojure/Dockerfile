@@ -1,4 +1,4 @@
-FROM clojure
+FROM clojure:alpine
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
