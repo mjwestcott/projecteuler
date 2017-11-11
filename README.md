@@ -1,13 +1,17 @@
-# Project Euler solved in Python, Clojure, and Go
+# Project Euler solved in Python, Go, Clojure, and Ruby
 
 ## The project
 
 This repository contains solutions to [Project Euler](https://projecteuler.net)
-in Python, Clojure, and Go. The aim is to complete problems 51-100.
+in Python, Go, Clojure, and Ruby. The aim is to complete problems 51-100.
 
 I've tried to think about each problem from the perspective of each language
 and solve them idiomatically. But given that some problems required hours of
 research, you will find I often adopt the same strategy to solve them.
+
+## Install
+
+Use `docker-compose up` to run the solutions in all languages.
 
 ## History
 
