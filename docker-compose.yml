@@ -9,3 +9,6 @@ services:
 
   clojure:
     build: ./clojure
+
+  ruby:
+    build: ./ruby
