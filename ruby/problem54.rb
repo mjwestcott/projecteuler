@@ -34,26 +34,26 @@ class Hand
     @grouped ||= ranks.group_by { |x| x }.map { |k, v| v.length }.sort.reverse
   end
 
-  def onepair() grouped == [2, 1, 1, 1] end
-  def twopair() grouped == [2, 2, 1] end
-  def threeofakind() grouped == [3, 1, 1] end
-  def straight() (ranks.max - ranks.min == 4) && ranks.uniq.length == 5 end
-  def flush() suits.uniq.length == 1 end
-  def fourofakind() grouped == [4, 1] end
-  def fullhouse() grouped == [3, 2] end
-  def straightflush() flush && straight end
+  def onepair?() grouped == [2, 1, 1, 1] end
+  def twopair?() grouped == [2, 2, 1] end
+  def threeofakind?() grouped == [3, 1, 1] end
+  def straight?() (ranks.max - ranks.min == 4) && ranks.uniq.length == 5 end
+  def flush?() suits.uniq.length == 1 end
+  def fourofakind?() grouped == [4, 1] end
+  def fullhouse?() grouped == [3, 2] end
+  def straightflush?() flush? && straight? end
 
   # Return a numerical value for the hand.
   def value
     @value ||= case
-      when straightflush then 8
-      when fullhouse then 7
-      when fourofakind then 6
-      when flush then 5
-      when straight then 4
-      when threeofakind then 3
-      when twopair then 2
-      when onepair then 1
+      when straightflush? then 8
+      when fullhouse? then 7
+      when fourofakind? then 6
+      when flush? then 5
+      when straight? then 4
+      when threeofakind? then 3
+      when twopair? then 2
+      when onepair? then 1
       else 0
     end
   end
