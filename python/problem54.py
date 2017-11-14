@@ -43,8 +43,8 @@ def group(ranks):
 def onepair(hand): return group(ranks(hand)) == [2, 1, 1, 1]
 def twopair(hand): return group(ranks(hand)) == [2, 2, 1]
 def threeofakind(hand): return group(ranks(hand)) == [3, 1, 1]
-def flush(hand): return len(set(suits(hand))) == 1
 def straight(hand): return ((max(ranks(hand)) - min(ranks(hand)) == 4) and len(set(ranks(hand))) == 5)
+def flush(hand): return len(set(suits(hand))) == 1
 def fourofakind(hand): return group(ranks(hand)) == [4, 1]
 def fullhouse(hand): return group(ranks(hand)) == [3, 2]
 def straightflush(hand): return (flush(hand) and straight(hand))
