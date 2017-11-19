@@ -17,4 +17,14 @@ class Utils
       }
     }
   end
+
+  # Based on Clojure's function of the same name.
+  def self.iterate(arg, &block)
+    Enumerator.new do |y|
+      loop do
+        y << arg
+        arg = block.call(arg)
+      end
+    end
+  end
 end

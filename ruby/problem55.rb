@@ -5,6 +5,8 @@
 # Lychrel number. How many Lychrel numbers are there below ten-thousand? (Only
 # consider fifty iterations)
 
+require_relative "utils"
+
 # Return the reverse of n's digits.
 def rev(n)
   n.to_s.chars.reverse.join('').to_i
@@ -14,19 +16,9 @@ def is_palindromic?(n)
   n == rev(n)
 end
 
-# Based on Clojure's function of the same name.
-def iterate(arg, &block)
-  Enumerator.new do |y|
-    loop do
-      y << arg
-      arg = block.call(arg)
-    end
-  end
-end
-
 def is_lychrel?(n)
   start = n + rev(n)
-  iterations = iterate(start) { |x| x + rev(x) }
+  iterations = Utils.iterate(start) { |x| x + rev(x) }
   iterations.take(50).none? { |y| is_palindromic?(y) }
 end
 
