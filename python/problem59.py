@@ -32,19 +32,19 @@ from collections import Counter
 from itertools import cycle
 
 
-def decrypt(cipher, start=0, n=3):
-    """Given a list of ints (cipher), find the most common item of the
-    sublist starting at given index (start), and taking every nth element.
-    We assume this item is an int representing the ordinal value of the
-    space character, so return item XOR ord(' ')"""
-    item, _ = Counter(cipher[start::n]).most_common()[0]
-    return item ^ ord(' ')
+def find_key(cipher):
+    for i in range(3):
+        # The most common item of the sublist starting at i, taking every 3rd element.
+        item, _ = Counter(cipher[i::3]).most_common()[0]
+        # We assume it's an int representing the ord of the space character
+        yield item ^ ord(' ')
 
 def problem59():
     with open("data/cipher.txt", "r") as f:
         cipher = [int(x) for x in f.read().split(',')]
-    key = [decrypt(cipher, start=i) for i in range(3)]
-    return sum(c ^ k for c, k in zip(cipher, cycle(key)))
+    key = find_key(cipher)
+    decrypted = (c ^ k for c, k in zip(cipher, cycle(key)))
+    return sum(decrypted)
 
 if __name__ == "__main__":
     print(problem59())
